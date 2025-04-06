@@ -70,7 +70,3 @@ The webpage is compatible with:
 - Mozilla Firefox
 - Microsoft Edge
 - Safari
-
-## Contact
-
-For technical issues with the project webpage template, contact the Technical Office of the School of Computing and Data Science.
