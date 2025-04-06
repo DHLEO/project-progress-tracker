@@ -62,3 +62,15 @@ The project progress webpage includes:
 - CSS3 with CSS Variables
 - Vanilla JavaScript
 - Font Awesome for icons
+
+## Browser Compatibility
+
+The webpage is compatible with:
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge
+- Safari
+
+## Contact
+
+For technical issues with the project webpage template, contact the Technical Office of the School of Computing and Data Science.
