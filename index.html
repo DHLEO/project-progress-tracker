@@ -92,30 +92,56 @@
 <h2>Data Resources</h2>
 
 Four datasets have been found that roughly meet the requirements and need to be used with discretion, not all of them may be usable.
-1. German Credit: Credit data from Germany. The original dataset contains 1000 entries with 20 categorical/symbolic attributes.In this dataset, each entry represents a person who received credit from a bank.Depending on the set of attributes, each person is categorized as either a good credit risk or a bad credit risk.
-2. Loan data: data of loan transactions from LendingClub (the world's largest peer-to-peer lending platform). Contains 1,800,000 consumer loans originated between 2014 and 2018.
-3. MFT credit ranking: data collected and designed by MFT to categorize credit rating scores.
-    P1: Excellent creditworthiness
-    P2: Good creditworthiness
-    P3: Fair credit
-    P4: Bad credit
-    These data are collected from financial institutions and contain a variety of characteristics related to customer demographics, credit history, and financial status.
-4. Real default: defaults that occurred in real scenarios (in fact the most granular data but feels the most difficult to process)
+1、 German Credit: Credit data from Germany. The original dataset contains 1000 entries with 20 categorical/symbolic attributes.In this dataset, each entry represents a person who received credit from a bank.Depending on the set of attributes, each person is categorized as either a good credit risk or a bad credit risk.
+2、 Loan data: data on lending transactions from LendingClub (the world's largest peer-to-peer lending platform). Contains 1,800,000 consumer loans originated between 2014 and 2018.
+3、 MIT credit ranking: data collected and designed by MIT to categorize credit rating scores.
+P1: very good creditworthiness
+P2: Good creditworthiness
+P3: Fair credit
+P4: Bad credit
+These data are collected from financial institutions and contain a variety of characteristics related to customer demographics, credit history, and financial status.
+4、 Real default: defaults that occurred in real scenarios (in fact this is the most granular data but feels the most difficult to process)
 
 <h2>Federal Learning Framework</h2>
 
-In this stage, we have conducted research on Python toolkit frameworks commonly used in federated learning, such as Fedlab, Flower, and SecretFlow. These toolkits are user-friendly, assisting users in building the client side and the server side, and implementing built-in or customized aggregation and computation methods. We have implemented the official demos of SecretFlow, including horizontal federated learning (HFL) and vertical federated learning (VFL). Whether it is HFL or VFL, the data requires to perform heterogeneous processing separately. Therefore, the selection, concatenation, and cleaning of the data are of great importance. In SecretFlow, the data will be distributed to different client sides, and the data content is protected through encryption methods to ensure data security.
+In this stage, we have conducted research on Python toolkit frameworks commonly used in federated learning, such as FedLab, Flower, and SecretFlow. All three frameworks are user-friendly, assisting users in building the client side and the server side, and implementing built-in or customized aggregation and comparison methods. We have implemented the official demos of SecretFlow, including horizontal federated learning (HFL) and vertical federated learning (VFL). Whether it is HFL or VFL, the data requires users to perform heterogeneous processing separately. Therefore, the selection, concatenation, and cleaning of the data are of great importance. In SecretFlow, the data will be distributed to different client sides, and the data content is protected through encryption methods to ensure data security. 
 
 <h2>Official Documents:</h2>
 
 SecretFlow: https://www.secretflow.org.cn/en/docs/secretflow/main/tutorial
 Flower: https://flower.ai/docs/framework/main/en/index.html
-Fedlab: https://fedlab.readthedocs.io/zh-cn/latest/index.html
-
+FedLab: https://fedlab.readthedocs.io/zh-cn/latest/index.html
+ 
 <h1>Challenges</h1>
 
 <h2>Data challenges</h2>
-">
+(i) Data heterogeneity
+There are often differences in data characteristics and distribution between datasets from different sources, i.e., data heterogeneity.This data heterogeneity can seriously affect the performance of a federated learning model, making it difficult for the model to achieve good results on data from all participants.
+
+(ii) Communication overhead
+Federated learning requires transmission of model parameters among multiple participants.When the dataset size is huge and there are many participants, the frequent transmission of model parameters will generate huge communication overhead, which will also lead to a longer training process.Loan data and Real default two data files will have this problem.
+
+(iii) Inconsistent data formats
+Different sources of datasets may use different data formats.Including different features of the different scale between the different features as well as the labeling of the way is not uniform.Failure to convert and standardize the format correctly can result in the data not being loaded smoothly into the federated learning system.
+
+(iv) Failure to ensure data quality
+
+The data quality of different data sources may vary significantly, such as missing data, noisy data, etc.These low-quality data will affect the accuracy of model training and reduce model performance.
+
+<h2>Challenges in the algorithm</h2>
+Challenges include dealing with semantic ambiguity (e.g., \"income\" vs. \"annual income\"), dynamic schema updates, and privacy constraints (e.g., hashing sensitive data).Challenges include resolving ID collisions between organizations, optimizing memory for large datasets, and managing label distribution bias.
+
+<h1>Plans for upcoming weeks</h1>
+
+<h2>(i) Data pre-processing</h2>
+1. Format unification: develop data format conversion tools to unify data sets in different formats into the standard format supported by the federal learning system to ensure that the data can be loaded smoothly.
+2. Quality enhancement: adopt data cleaning algorithms to remove noisy data and deal with missing values.For example, for numerical data, mean and median can be used to fill in the missing values; for text data, word embedding technology can be used for denoising and patching.
+3. annotation calibration: establish a unified annotation standard and calibrate annotation data from different sources by manual review and cross-validation to improve the consistency and accuracy of annotation.
+
+<h2>(ii) Research Method</h2>
+Adaptive federated learning algorithms, such as federated migration learning, are used.This algorithm can extract common features between different datasets and improve the generalization ability of the model through the migration learning method when there are differences in data features and distribution.Also consider the communication cost.
+Combining the existing data, test the effectiveness of different methods such as horizontal federation and vertical federation, and select the optimal method.Attempt to implement federated learning and complete the code demo.
+For data mapping: it is expected that a unified schema mapping system can be developed to harmonize data fields across institutions and automatically generate schemas using Python tools. Integration with the LEAF preprocessing pipeline is in progress. Horizontal partitioning will also be addressed, where the dataset is partitioned based on the sample IDs of the horizontal joint learning. Outcomes include modeling non-IID data partitioning, scalable data processing, and ensuring reproducibility through logging and seeding control.">
                         <div class="update-date">Apr 3, 2025</div>
                         <div class="update-content">
                             <h3>Progress Update 1</h3>
