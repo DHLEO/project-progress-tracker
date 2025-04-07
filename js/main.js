@@ -77,9 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize the modal for update details
     initUpdateDetailsModal();
-
-    // 尝试加载marked库
-    tryLoadMarkedLibrary();
 });
 
 function fixButtonsDisplay() {
@@ -237,72 +234,11 @@ function initUpdateDetailsModal() {
 // 渲染markdown的函数
 function renderMarkdown(markdownText, container) {
     try {
-        // 首先尝试使用marked库
-        if (typeof marked !== 'undefined') {
-            marked.setOptions({
-                breaks: true,
-                gfm: true,
-                headerIds: false,
-                mangle: false
-            });
-            container.innerHTML = marked.parse(markdownText);
-            console.log('Markdown rendered with marked');
-        } else {
-            // 如果marked不可用，使用备选函数
-            console.warn('Marked library not found, using simple markdown parser');
-            container.innerHTML = simpleMarkdownToHtml(markdownText);
-        }
+        // 直接使用HTML内容，不做任何转换
+        container.innerHTML = markdownText;
+        console.log('Content displayed as HTML');
     } catch (error) {
-        console.error('Error rendering markdown with marked:', error);
-        // 出错时也使用备选函数
-        console.warn('Falling back to simple markdown parser');
-        container.innerHTML = simpleMarkdownToHtml(markdownText);
-    }
-}
-
-// 备选markdown解析函数
-function simpleMarkdownToHtml(markdown) {
-    if (!markdown) return '';
-    
-    // 替换标题
-    let html = markdown.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
-    html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
-    html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
-    
-    // 替换列表项
-    html = html.replace(/^- (.*?)$/gm, '<li>$1</li>');
-    html = html.replace(/(<li>.*?<\/li>)(\s*<li>)/g, '$1<li>');
-    html = html.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
-    
-    // 替换代码块
-    html = html.replace(/```(.*?)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-    
-    // 替换段落（必须在最后执行）
-    html = html.replace(/^(?!(<h|<ul|<pre))(.*?)$/gm, function(match) {
-        if (match.trim() === '') return '';
-        return '<p>' + match + '</p>';
-    });
-    
-    // 处理空行
-    html = html.replace(/\n\n+/g, '<br><br>');
-    
-    return html;
-}
-
-// 尝试加载marked库
-function tryLoadMarkedLibrary() {
-    if (typeof marked === 'undefined') {
-        console.log('Trying to load marked library dynamically');
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js';
-        script.integrity = 'sha256-6XxHEqxknBzVlgMoIoZnxwVQR9b/wKHh82LRqDCz0DY=';
-        script.crossOrigin = 'anonymous';
-        script.onload = function() {
-            console.log('Marked library loaded successfully');
-        };
-        script.onerror = function() {
-            console.error('Failed to load marked library');
-        };
-        document.head.appendChild(script);
+        console.error('Error displaying content:', error);
+        container.innerHTML = '<p>Error displaying content. Please try again later.</p>';
     }
 }
