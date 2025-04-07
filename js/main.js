@@ -74,6 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Ensure expand/collapse buttons display correctly
     fixButtonsDisplay();
+    
+    // Initialize the modal for update details
+    initUpdateDetailsModal();
 });
 
 function fixButtonsDisplay() {
@@ -169,6 +172,69 @@ function initCollapsible() {
                     }
                 });
             }
+        });
+    });
+}
+
+// Modal and Markdown handling
+function initUpdateDetailsModal() {
+    const modal = document.getElementById('update-modal');
+    const closeBtn = document.querySelector('.close-modal');
+    const markdownContainer = document.getElementById('markdown-content');
+    const updateItems = document.querySelectorAll('.update-item');
+    const viewDetailsButtons = document.querySelectorAll('.view-details');
+    
+    // Close modal when clicking the close button
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Add click event to update items
+    updateItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            // Get the markdown content from the data attribute
+            const markdownText = this.getAttribute('data-markdown');
+            
+            // Render the markdown using the marked library
+            if (window.marked) {
+                markdownContainer.innerHTML = marked.parse(markdownText);
+            } else {
+                markdownContainer.innerHTML = '<p>Error: Markdown parser not loaded</p>';
+            }
+            
+            // Display the modal
+            modal.style.display = 'block';
+        });
+    });
+    
+    // Add click event to view details buttons
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Prevent the click from propagating to the parent update item
+            e.stopPropagation();
+            
+            // Get the parent update item
+            const updateItem = this.closest('.update-item');
+            
+            // Get the markdown content from the data attribute
+            const markdownText = updateItem.getAttribute('data-markdown');
+            
+            // Render the markdown using the marked library
+            if (window.marked) {
+                markdownContainer.innerHTML = marked.parse(markdownText);
+            } else {
+                markdownContainer.innerHTML = '<p>Error: Markdown parser not loaded</p>';
+            }
+            
+            // Display the modal
+            modal.style.display = 'block';
         });
     });
 }
