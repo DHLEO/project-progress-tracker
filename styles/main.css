@@ -573,21 +573,34 @@ section h2::after {
 }
 
 .view-details {
-    color: var(--text-light);
-    background-color: var(--primary-color);
+    color: #ffffff !important;
+    background-color: #4a6cf7 !important;
     font-size: 0.9rem;
     font-weight: 500;
     margin-top: 0.8rem;
     display: inline-block;
     padding: 0.4rem 1rem;
     border-radius: 4px;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    outline: none;
+    font-family: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .view-details:hover {
-    background-color: var(--primary-dark);
+    background-color: #3a56c5 !important;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.view-details i {
+    margin-right: 5px;
 }
 
 /* Footer Styles */
