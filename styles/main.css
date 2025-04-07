@@ -465,13 +465,13 @@ section h2::after {
 
 .modal-content {
     background-color: var(--card-bg);
-    margin: 5% auto;
-    padding: 2rem;
+    margin: 3% auto;
+    padding: 3rem;
     border-radius: 8px;
     box-shadow: var(--shadow);
-    width: 80%;
-    max-width: 800px;
-    max-height: 80vh;
+    width: 95%;
+    max-width: 1200px;
+    max-height: 90vh;
     overflow-y: auto;
     position: relative;
 }
@@ -479,12 +479,13 @@ section h2::after {
 .close-modal {
     color: var(--text-secondary);
     float: right;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
     transition: var(--transition);
     line-height: 1;
-    margin-top: -10px;
+    margin-top: -15px;
+    margin-right: -10px;
 }
 
 .close-modal:hover {
@@ -492,34 +493,35 @@ section h2::after {
 }
 
 .markdown-container {
-    margin-top: 1rem;
-    line-height: 1.7;
+    margin-top: 2rem;
+    line-height: 1.9;
+    font-size: 1.15rem;
 }
 
 .markdown-container h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
 }
 
 .markdown-container h2 {
-    font-size: 1.6rem;
-    margin: 1.5rem 0 1rem;
+    font-size: 2rem;
+    margin: 2rem 0 1.3rem;
 }
 
 .markdown-container h3 {
-    font-size: 1.4rem;
-    margin: 1.2rem 0 0.8rem;
+    font-size: 1.7rem;
+    margin: 1.7rem 0 1.1rem;
 }
 
 .markdown-container p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
 }
 
 .markdown-container ul, .markdown-container ol {
-    margin-left: 2rem;
-    margin-bottom: 1rem;
+    margin-left: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .markdown-container ul {
@@ -531,33 +533,61 @@ section h2::after {
 }
 
 .markdown-container li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.9rem;
 }
 
 .markdown-container pre {
     background-color: var(--light-bg);
-    padding: 1rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
     overflow-x: auto;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .markdown-container code {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.markdown-container blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1.5rem;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--text-secondary);
 }
 
 /* Update Item Styles */
+.update-item {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.update-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.1);
+}
+
 .view-details {
-    color: var(--primary-color);
+    color: var(--text-light);
+    background-color: var(--primary-color);
     font-size: 0.9rem;
     font-weight: 500;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    transition: var(--transition);
 }
 
 .view-details:hover {
-    text-decoration: underline;
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer Styles */
