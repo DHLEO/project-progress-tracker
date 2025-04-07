@@ -124,7 +124,7 @@ In this stage, we have conducted research on Python toolkit frameworks commonly 
 
 <h1>Challenges</h1>
 
-<h2>Data challenges</h2>
+<h2>Data Challenges</h2>
 (1) Data heterogeneity
 There are often differences in data characteristics and distribution between datasets from different sources, i.e., data heterogeneity.This data heterogeneity can seriously affect the performance of a federated learning model, making it difficult for the model to achieve good results on data from all participants.
 <br>
@@ -147,14 +147,14 @@ Challenges include dealing with semantic ambiguity (e.g., &quot;income&quot; vs.
 
 <h1>Plans for upcoming weeks</h1>
 
-<h2>Data pre-processing</h2>
+<h2>Data Pre-processing</h2>
 (1) Format unification: develop data format conversion tools to unify data sets in different formats into the standard format supported by the federal learning system to ensure that the data can be loaded smoothly.
 <br>
 (2) Quality enhancement: adopt data cleaning algorithms to remove noisy data and deal with missing values.For example, for numerical data, mean and median can be used to fill in the missing values; for text data, word embedding technology can be used for denoising and patching.
 <br>
 (3) annotation calibration: establish a unified annotation standard and calibrate annotation data from different sources by manual review and cross-validation to improve the consistency and accuracy of annotation.
 
-<h2>Attempt to implement federated learning</h2>
+<h2>Attempt to Implement Federated Learning</h2>
 Adaptive federated learning algorithms, such as federated migration learning, are used.This algorithm can extract common features between different datasets and improve the generalization ability of the model through the migration learning method when there are differences in data features and distribution.Also consider the communication cost.
 Combining the existing data, test the effectiveness of different methods such as horizontal federation and vertical federation, and select the optimal method.Attempt to implement federated learning and complete the code demo.
 For data mapping: it is expected that a unified schema mapping system can be developed to harmonize data fields across institutions and automatically generate schemas using Python tools. Integration with the LEAF preprocessing pipeline is in progress. Horizontal partitioning will also be addressed, where the dataset is partitioned based on the sample IDs of the horizontal joint learning. Outcomes include modeling non-IID data partitioning, scalable data processing, and ensuring reproducibility through logging and seeding control.
