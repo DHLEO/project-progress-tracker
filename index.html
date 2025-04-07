@@ -87,32 +87,35 @@
             <section id="updates">
                 <h2>Progress Updates</h2>
                 <div class="updates-list">
-                    <div class="update-item" data-markdown="<h1>Progress Update 1</h1>
-                    
-<h2>Project Launch</h2>
-<p>Project officially launched on April 3, 2025. This marks the beginning of our 6-month journey to develop the federated learning system.</p>
+                    <div class="update-item milestone" data-markdown="<h1>Achievements</h1>
 
-<h2>Activities Completed</h2>
-<ul>
-<li>Assigned team roles and responsibilities</li>
-<li>Set up the project management infrastructure</li>
-<li>Established communication channels</li>
-<li>Completed initial project planning</li>
-</ul>
+<h2>Data Resources</h2>
 
-<h2>Technical Decisions</h2>
-<ul>
-<li>Decided to use PyTorch as the main ML framework</li>
-<li>Selected secure communication protocols</li>
-<li>Established coding standards and repository structure</li>
-</ul>
+Four datasets have been found that roughly meet the requirements and need to be used with discretion, not all of them may be usable.
+1. German Credit: Credit data from Germany. The original dataset contains 1000 entries with 20 categorical/symbolic attributes.In this dataset, each entry represents a person who received credit from a bank.Depending on the set of attributes, each person is categorized as either a good credit risk or a bad credit risk.
+2. Loan data: data of loan transactions from LendingClub (the world's largest peer-to-peer lending platform). Contains 1,800,000 consumer loans originated between 2014 and 2018.
+3. MFT credit ranking: data collected and designed by MFT to categorize credit rating scores.
+    P1: Excellent creditworthiness
+    P2: Good creditworthiness
+    P3: Fair credit
+    P4: Bad credit
+    These data are collected from financial institutions and contain a variety of characteristics related to customer demographics, credit history, and financial status.
+4. Real default: defaults that occurred in real scenarios (in fact the most granular data but feels the most difficult to process)
 
-<h2>Next Steps</h2>
-<ul>
-<li>Begin data schema mapping and standardization</li>
-<li>Research state-of-the-art in federated learning approaches</li>
-<li>Start building test environments</li>
-</ul>">
+<h2>Federal Learning Framework</h2>
+
+In this stage, we have conducted research on Python toolkit frameworks commonly used in federated learning, such as Fedlab, Flower, and SecretFlow. These toolkits are user-friendly, assisting users in building the client side and the server side, and implementing built-in or customized aggregation and computation methods. We have implemented the official demos of SecretFlow, including horizontal federated learning (HFL) and vertical federated learning (VFL). Whether it is HFL or VFL, the data requires to perform heterogeneous processing separately. Therefore, the selection, concatenation, and cleaning of the data are of great importance. In SecretFlow, the data will be distributed to different client sides, and the data content is protected through encryption methods to ensure data security.
+
+<h2>Official Documents:</h2>
+
+SecretFlow: https://www.secretflow.org.cn/en/docs/secretflow/main/tutorial
+Flower: https://flower.ai/docs/framework/main/en/index.html
+Fedlab: https://fedlab.readthedocs.io/zh-cn/latest/index.html
+
+<h1>Challenges</h1>
+
+<h2>Data challenges</h2>
+">
                         <div class="update-date">Apr 3, 2025</div>
                         <div class="update-content">
                             <h3>Progress Update 1</h3>
