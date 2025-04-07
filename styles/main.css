@@ -672,6 +672,7 @@ footer p {
     border-radius: 50px;
     cursor: pointer;
     font-weight: 500;
+    font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -690,6 +691,7 @@ footer p {
 .expand-btn i {
     transition: transform 0.3s ease;
     margin-left: 5px;
+    font-size: 1.1rem;
 }
 
 /* Visibility control for expand/collapse text */
