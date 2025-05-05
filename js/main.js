@@ -234,9 +234,15 @@ function initUpdateDetailsModal() {
 // 渲染markdown的函数
 function renderMarkdown(markdownText, container) {
     try {
-        // 直接使用HTML内容，不做任何转换
-        container.innerHTML = markdownText;
-        console.log('Content displayed as HTML');
+        // 处理Markdown图片语法 ![alt text](image.png)
+        let htmlContent = markdownText;
+        
+        // 将Markdown图片语法转换为HTML <img> 标签
+        htmlContent = htmlContent.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="max-width:100%;">');
+        
+        // 直接使用处理后的HTML内容
+        container.innerHTML = htmlContent;
+        console.log('Content displayed as HTML with image support');
     } catch (error) {
         console.error('Error displaying content:', error);
         container.innerHTML = '<p>Error displaying content. Please try again later.</p>';

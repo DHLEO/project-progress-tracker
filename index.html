@@ -87,25 +87,23 @@
             <section id="updates">
                 <h2>Progress Updates</h2>
                 <div class="updates-list">
-                    <div class="update-item milestone" data-markdown="3
-Project Progress Update 2 on  
-\"A Dynamic Credit Risk Prediction System  
-Based on Federated Learning\" 
-He Fuzhi  He Yanze  Huang Ruifan  Liu Dahai 
- 
-1.Achievements 
- 
-1.1 Data Preprocessing 
-In the horizontal federated learning demo, we use the German credit dataset, which contains 
+                    <div class="update-item milestone" data-markdown="<h1>Project Progress Update 2</h1>
+
+<h2>1. Achievements</h2>
+
+<h3>1.1 Data Preprocessing</h3>
+<p>In the horizontal federated learning demo, we use the German credit dataset, which contains 
 roughly 1,000 records described by 20 input features and a single binary target called kredit. 
-In the raw data, about 70% of applicants are labeled as \"good\" credit (1) and 30% as \"bad\" 
+In the raw data, about 70% of applicants are labeled as &quot;good&quot; credit (1) and 30% as &quot;bad&quot; 
 credit (0). All categorical fields are represented by integer codes, and numeric fields span a 
-range of values such as loan amount and duration.Prior to modeling, categorical features are 
+range of values such as loan amount and duration.</p>
+
+<p>Prior to modeling, categorical features are 
 label-encoded and all numeric features are standardized to zero mean and unit variance. The 
 full dataset is then split 80/20 into training (≈800 samples) and testing (≈200 samples) sets. 
-The training set is further divided equally among three clients (≈266 samples each).  
- 
-In the vertical federated learning demo, multiple data sources need to possess the following 
+The training set is further divided equally among three clients (≈266 samples each).</p>
+
+<p>In the vertical federated learning demo, multiple data sources need to possess the following 
 core characteristics. Firstly, there should be a high degree of overlap in sample IDs. A large 
 number of identical sample identifiers must exist among different data sources, which serves 
 as the basis for data alignment and joint modeling. By associating the data from various 
@@ -113,9 +111,9 @@ parties through the same sample IDs, collaborative learning can be achieved. Sec
 features should be complementary. The features of each data source describe the samples 
 from different dimensions, providing differentiated information. In this way, the data from 
 multiple parties can be integrated to enhance the accuracy and generalization ability of the 
-model. 
- 
-Accordingly, in order to verify the feasibility of the algorithm in this round of experiment, we 
+model.</p>
+
+<p>Accordingly, in order to verify the feasibility of the algorithm in this round of experiment, we 
 adopted the data collected by MIT, which evaluates the credit ratings of users from multiple 
 aspects and with a high breadth of features. We divided the data equally into three parts and 
 aligned the sample IDs. One of the parts, which contains the personal information of users, 
@@ -123,17 +121,18 @@ classifies the users' credit ratings into four categories from high to low. The 
 the data contain other bank and account features but do not include classification labels. 
 Finally, after processing the missing values, dealing with the outliers, labelizing the 
 character-type data, and standardizing the data, these three parts of data were put into use in 
-this round of experiment. 
- 
-1.2 Horizontal Federated Learning Demo 
-In this demo, we perform horizontal federated learning on the German Credit dataset, where 
+this round of experiment.</p>
+
+<h3>1.2 Horizontal Federated Learning Demo</h3>
+<p>In this demo, we perform horizontal federated learning on the German Credit dataset, where 
 each client holds a different subset of borrower records but uses the same feature set. We 
 divide the data randomly into several shards and assign each shard to a Flower NumPyClient. 
 Each client trains a small multilayer perceptron locally—three hidden layers of 64, 32, and 16 
 units with ReLU activations and a sigmoid output—using a fixed number of mini‑batch 
 gradient‑descent epochs (with optional L₂ regularization and gradient clipping). Clients never 
-share raw data; they send only their model's parameter updates to the central server. 
-The Flower server collects these updates and computes a weighted average based on each 
+share raw data; they send only their model's parameter updates to the central server.</p>
+
+<p>The Flower server collects these updates and computes a weighted average based on each 
 client's number of samples to produce a new global model. To evaluate the benefit of 
 collaboration, we also run a separate script that trains the same network architecture in two 
 additional modes: entirely centralized (all data pooled) and isolated local (each shard 
@@ -141,54 +140,55 @@ individually). We then plot training and validation accuracy over communication 
 all three scenarios. The results show that federated learning converges faster and achieves 
 substantially higher validation accuracy than any single‑shard model, while approaching the 
 performance of the fully centralized baseline—demonstrating that model quality can be 
-greatly improved through collaborative training without ever exchanging private data. 
- 
- 
- 
- 
-1.3 Vertical Federated Learning Demo 
-After preprocessing, the data from MIT was divided into three sub-datasets. The data sample 
+greatly improved through collaborative training without ever exchanging private data.</p>
+
+![Federated Learning vs. Centralized vs. Local Training Performance Comparison](images/nn_accuracy_comparison.png)
+
+<h3>1.3 Vertical Federated Learning Demo</h3>
+<p>After preprocessing, the data from MIT was divided into three sub-datasets. The data sample 
 sizes in different sub-datasets are the same, but the features they contain are different. 
 Therefore, the vertical federated learning architecture can be employed. The Secretflow 
 architecture has a built-in basic framework for implementing vertical federated learning, 
 which enables users to conveniently set up the server side and client sides according to their 
 needs. Thus, the three datasets can be allocated to three parties, and one party can be selected 
 as the server side. The FedNdArray data structure in Secretflow can directly receive the three 
-datasets and automatically distribute them among the three parties. In terms of model 
+datasets and automatically distribute them among the three parties.</p>
+
+<p>In terms of model 
 construction, Secretflow is highly compatible with the Pytorch architecture, allowing Pytorch 
 models to be encapsulated for model training. After the data and model are prepared, a 
 vertical federated learning demo can be successfully established. In this experiment, a simple 
 MLP model was used, and the experimental results showed that the model trained through 
 federated learning using the data from the three parties outperformed the model trained using 
 the data from a single party. This outcome is consistent with expectations, as the data from 
-the three parties expanded the data features, which is conducive to the learning of the model. 
- 
-2. Challenges Faced 
- 
-2.1 Dataset 
-We have thus far partitioned our original dataset into three disjoint subsets—either by 
+the three parties expanded the data features, which is conducive to the learning of the model.</p>
+
+<h2>2. Challenges Faced</h2>
+
+<h3>2.1 Dataset</h3>
+<p>We have thus far partitioned our original dataset into three disjoint subsets—either by 
 allocating samples across the folds to simulate horizontal federated learning or by dividing 
 feature sets among the parties to emulate a vertical federated scenario. We would greatly 
 appreciate your guidance on whether there exist more suitable benchmark datasets—perhaps 
 those characterized by pronounced statistical heterogeneity or richer feature modalities—or 
 alternative approach that you would recommend for strengthening the rigor and realism of 
-our federated learning experiments. 
- 
-2.2 Innovation 
-We would welcome your insight as to whether our federated learning–based credit risk 
+our federated learning experiments.</p>
+
+<h3>2.2 Innovation</h3>
+<p>We would welcome your insight as to whether our federated learning–based credit risk 
 scoring project would benefit from one or more substantive methodological innovations to 
 elevate its academic and practical impact. If you believe novel contributions are warranted, 
-could you recommend specific directions? 
- 
-3. Future Plans 
- 
-Test on richer, multi‑modal credit datasets—such as those combining tabular borrower 
+could you recommend specific directions?</p>
+
+<h2>3. Future Plans</h2>
+
+<p>Test on richer, multi‑modal credit datasets—such as those combining tabular borrower 
 profiles, transaction sequences, and alternative data sources—while scaling our federation to 
 dozens of simulated participants (with hierarchical aggregation to reduce communication 
 overhead). Replace simple logistic‑regression baselines with advanced deep architectures (for 
 example, transformers to model time‑series transaction behavior and graph neural networks 
 to capture borrower–lender networks), and maybe introduce novel methodological 
-enhancement to push the state of the art in our federated‑learning framework.">
+enhancement to push the state of the art in our federated‑learning framework.</p>">
                         <div class="update-date">May 1, 2025</div>
                         <div class="update-content">
                             <h3>Progress Update 2</h3>
