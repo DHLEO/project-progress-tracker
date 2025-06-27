@@ -48,7 +48,7 @@
                         <div class="stat">
                             <h3>Completion</h3>
                             <div class="progress-bar">
-                                <div class="progress" style="width: 65%;">65%</div>
+                                <div class="progress" style="width: 70%;">70%</div>
                             </div>
                         </div>
                     </div>
@@ -88,6 +88,87 @@
             <section id="updates">
                 <h2>Progress Updates</h2>
                 <div class="updates-list">
+                    <div class="update-item milestone" data-markdown="<h1>Project Progress Update 3</h1>
+
+<h2>1. Achievements</h2>
+
+<h3>1.1 Privacy Protection Technology</h3>
+
+<h4>1.1.1 Flower Framework</h4>
+<p>Flower is an open-source federated learning framework dedicated to supporting the training and deployment of distributed machine learning models. It achieves collaborative model optimization without centralized data (e.g., via the FedAvg algorithm) through a client-server architecture, is compatible with mainstream frameworks such as PyTorch and TensorFlow, features a modular design and privacy-preserving characteristics (e.g., reducing data transmission and supporting differential privacy), and provides a flexible and efficient solution for distributed machine learning in privacy-sensitive scenarios such as edge devices, healthcare, and finance.</p>
+
+<p>Flower itself does not directly provide built-in privacy-preserving algorithms, but it supports various privacy protection mechanisms through architectural design and extensible interfaces.</p>
+
+<p><strong>Fundamental Privacy-Preserving Mechanisms:</strong></p>
+<p>The core principle is data localization, where raw data is not shared: the local data of participants (clients) remains on-site at all times, with only model parameters (e.g., gradients, weights) uploaded to the server, thus avoiding direct exposure of raw data. Subsequent decentralized training is performed entirely on client-side devices, with the server only aggregating the global model. In terms of secure parameter transmission, Flower natively supports encrypted transmission via HTTPS or gRPC to prevent man-in-the-middle attacks from eavesdropping on gradients or model parameters.</p>
+
+<p><strong>Advanced Privacy-Preserving Techniques (Extensible):</strong></p>
+<p>Flower's modular design enables users to implement advanced privacy-preserving techniques through extensions:</p>
+<ul>
+<li><strong>Differential Privacy (DP):</strong> Noise (e.g., Gaussian noise) is added to gradients before clients upload them, ensuring that individual data cannot be inferred from the gradients.</li>
+<li><strong>Secure Aggregation:</strong> Techniques such as multi-party encrypted aggregation use cryptographic methods (e.g., MPC) to prevent the server from observing contributions from individual clients during gradient aggregation.</li>
+<li><strong>Trusted Execution Environment (TEE):</strong> The aggregation logic on the server side is executed within a hardware-secured area (e.g., Intel SGX's Enclave), ensuring that even server administrators cannot access the data in memory.</li>
+<li><strong>Gradient Clipping:</strong> Limits the range of gradient values (e.g., L2 norm) to reduce the amount of raw data information embedded in gradients.</li>
+</ul>
+
+<h4>1.1.2 SecretFlow</h4>
+<p>SecretFlow natively integrates multiple encrypted computation virtual devices, including MPC, TEE, TECC, and homomorphic encryption, to enable flexible selection, and provides a rich set of federated learning algorithms and differential privacy mechanisms. It aims to reduce the technical barriers for developers and users of privacy computing through a well-designed layered architecture and out-of-the-box functionalities for privacy-preserving data analysis and machine learning.</p>
+
+<p>In the device layer of the SecretFlow framework, the fundamental unit is the SecretFlow Processing Unit (SPU). The SPU provides a unified programmable device abstraction, where privacy computing technologies (e.g., MPC) are abstracted as encrypted devices, and single-party local computation is abstracted as plaintext devices. The SPU backend, which is based on MPC, essentially operates as a distributed system responsible for handling communication and coordination in distributed environments.</p>
+
+<p>Programming with SPU not only interfaces with AI frameworks (e.g., TensorFlow, JAX, PyTorch) to reduce the learning and development costs for AI developers but also provides pure secure semantic interfaces. By implementing only a small number of security protocols (e.g., addition, multiplication, AND, OR), complex models can be executed, allowing developers to focus more on security itself.</p>
+
+<h3>1.2 Horizontal Federated Learning</h3>
+<p>We conducted a federated learning experiment using 10,000 loan data records, distributed evenly across three clients. Each client retained the original bad loan distribution, and data did not overlap. A centralized server coordinated the training process using the FedAvg strategy, with all model evaluations conducted on a unified test set.</p>
+
+<p>The system was built using the Flower framework and PyTorch. Each client locally trained a neural network and shared model parameters with the server. The server aggregated these updates to form a global model. After five training rounds, we compared the accuracy of the federated model with that of independently trained local models.</p>
+
+<p>Results showed that federated learning preserved data privacy while improving model performance through distributed training. Accuracy improvements were recorded and visualized, demonstrating the effectiveness of knowledge aggregation across clients without direct data sharing.</p>
+
+![Individual Training vs Federated Learning Accuracy Comparison](images/horizontal_fl_accuracy_update3.png)
+
+<h2>2. Challenges</h2>
+
+<p>In horizontal federated learning, the federated learning's performance exhibits limited improvement, potentially due to several interconnected factors:</p>
+
+<p><strong>High Data Homogeneity:</strong> When client datasets share highly similar feature distributions (e.g., overlapping user behaviors or task types), locally trained models already approach optimal performance. Federated aggregation thus provides minimal additional gain, as seen in scenarios where individual client accuracies exceed 98% with negligible variance.</p>
+
+<p><strong>Defective Aggregation Strategies:</strong> Standard algorithms like FedAvg use simplistic averaging, which fails to address non-IID data or client contribution disparities. This can cause dimensional collapse, where aggregated models lose feature diversity and struggle to generalize.</p>
+
+<p><strong>Insufficient Training:</strong> Inadequate communication rounds or local epochs prevent models from converging. Synchronization delays (e.g., waiting for stragglers) further slow knowledge integration, especially in heterogeneous computing environments.</p>
+
+<p><strong>Data Quality and Feature Analysis:</strong> The experimental baseline shows that the model achieved exceptionally high performance on the classification task for this dataset. We consider such high performance occurring simultaneously on both the client and federated learning sides to be an anomalous phenomenon.</p>
+
+<p>In this round of experiments, we changed the algorithm model used in horizontal federated learning from a Random Forest to a Deep Neural Network (DNN). After switching from Random Forest to DNN, the model's performance exhibited an abnormal improvement. The possible reasons include:</p>
+
+<p>The compatibility between the data characteristics and DNN may be key. Deep neural networks excel at capturing complex nonlinear relationships and high-order interactive features. Although the data was standardized, extreme values and potential multimodal distributions still exist. DNNs may better model these complex patterns through multi-layer nonlinear transformations, whereas the tree-based structure of Random Forests has limited fine-grained partitioning capability for such continuous numerical features.</p>
+
+![Feature Correlation with Loan Status Analysis](images/feature_correlation_update3.png)
+
+<p>Through analysis, the <strong>recoveries</strong> feature exhibits a correlation gain that far surpasses other features. This feature, which resembles &quot;bad debt recovery amount&quot; (i.e., the amount recovered through collection efforts after loan default), may indicate high-risk users when its value is elevated. Similarly, another highly correlated feature, <strong>debt_settle</strong> (likely referring to &quot;Debt Settlement&quot;), denotes whether debt restructuring has occurred.</p>
+
+<p><strong>Vertical Federated Learning Challenges:</strong> In vertical federated learning, a complete model (such as a neural network) is artificially &quot;vertically&quot; split into different clients. This split may destroy the original structural integrity of the model. The contribution of features held by different clients to the final model prediction can vary greatly, leading to training bias towards clients with strong features and challenges in fair value quantification and benefit distribution.</p>
+
+<p>For privacy, each client must compress its features into a low-dimensional embedding. If a client's local model is too simple (e.g., a shallow network), it acts as a &quot;lossy compression,&quot; failing to capture the full complexity of its local data, potentially losing critical predictive information before it reaches the server.</p>
+
+<h2>3. Future Plans</h2>
+
+<p>For horizontal federated learning, to alleviate the limitations mentioned above, federated systems should:</p>
+
+<ul>
+<li><strong>Promote Greater Data Heterogeneity:</strong> Strategically sample or augment client data and group clients with complementary feature distributions so that cross-client aggregation genuinely adds new information.</li>
+<li><strong>Implement Robust Aggregation Schemes:</strong> Replace naïve FedAvg with more robust methods such as FedProx, FedNova, or attention-based and contribution-weighted methods to discourage dimensional collapse and reward informative updates.</li>
+<li><strong>Extend Training Budgets:</strong> Use more communication rounds, adaptive local-epoch schedules, and asynchronous or straggler-tolerant protocols (e.g., FedBuff or partial-update acceptance) to ensure sufficient convergence despite heterogeneous computing resources.</li>
+</ul>
+
+<p>Together, these measures will substantially boost the generalization and stability of horizontally federated models, bringing us closer to a production-ready system for privacy-preserving credit risk prediction.</p>">
+                        <div class="update-date">Jun 16, 2025</div>
+                        <div class="update-content">
+                            <h3>Progress Update 3</h3>
+                            <p>Latest comprehensive update documenting advanced algorithm implementations, system architecture refinements, security enhancements, and detailed performance evaluations of our federated learning system.</p>
+                            <div class="view-details"><i class="fas fa-file-alt"></i> View Details</div>
+                        </div>
+                    </div>
                     <div class="update-item milestone" data-markdown="<h1>Project Progress Update 2</h1>
 
 <h2>1. Achievements</h2>
@@ -492,7 +573,7 @@ During the demo, we will perform data cleaning, format unification, feature alig
 
     <footer>
         <div class="container">
-            <p>Last updated: <span id="last-updated">June 14, 2025</span></p>
+            <p>Last updated: <span id="last-updated">June 16, 2025</span></p>
         </div>
     </footer>
 
