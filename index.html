@@ -48,7 +48,7 @@
                         <div class="stat">
                             <h3>Completion</h3>
                             <div class="progress-bar">
-                                <div class="progress" style="width: 70%;">70%</div>
+                                <div class="progress" style="width: 85%;">85%</div>
                             </div>
                         </div>
                     </div>
@@ -88,6 +88,36 @@
             <section id="updates">
                 <h2>Progress Updates</h2>
                 <div class="updates-list">
+                    <div class="update-item milestone" data-markdown="<h1>Project Progress Update 4</h1>
+
+<h2>Achievements</h2>
+
+<p>We conducted a four-class classification task on the MIT credit rating dataset using both independent training and horizontal federated learning. The data was evenly split across three clients under an IID setting, where each client received the same number of samples and maintained the global class distribution. All clients used the same neural network architecture. Independent training was performed for 30 local epochs per client, while federated learning involved 15 rounds of aggregation with 6 local epochs per round (i.e., 90 total local epochs).</p>
+
+<p>Each client was assigned 17,112 samples, with 13,689 for training and 3,423 for testing. The class distribution was identical across all clients, roughly reflecting the global distribution: around 62.7% for class P2, 11.3% for P1, 14.5% for P3, and 11.5% for P4. This balanced IID setup ensured that learning performance was not affected by data heterogeneity and enabled fair comparison between training strategies.</p>
+
+<p>In the IID setting, independently trained models achieved high validation accuracy, with Client 1 reaching 95.97% at epoch 24 and Client 2 reaching 95.59% at epoch 26. This demonstrates strong convergence and minimal overfitting. The federated learning model, expected to aggregate diverse client updates, is anticipated to perform comparably or even better due to consistent data distribution and increased generalization. Federated learning also offers the benefit of collaborative learning without sharing raw data, making it suitable for privacy-sensitive applications.</p>
+
+![Four-Class Classification Results on MIT Credit Rating Dataset](images/4.png)
+
+<h2>Challenges</h2>
+
+<p>Even under IID data settings, subtle differences or inconsistencies in local training processes across clients can still impact the global model's performance. These differences might arise from variations in client hardware, local optimization strategies, or even slight discrepancies in data processing techniques. As a result, despite the data being independently and identically distributed, the local models may not converge at the same rate or even in the same direction, leading to suboptimal global model performance. Therefore, ensuring greater consistency in client updates, such as harmonizing training protocols, model architectures, and data preprocessing steps, is crucial to mitigate the risk of performance degradation. Addressing this issue involves refining federated learning frameworks to ensure that local models can consistently contribute to the global model, improving its robustness across diverse client environments.</p>
+
+<p>Federated learning is often focused on creating a global model that can generalize well across all clients. However, this goal becomes increasingly challenging when clients possess distinct data distributions or have unique specific needs. While a global model trained on the collective data of all clients might perform well on average, it may fail to capture the nuances of individual client data, thus hindering its ability to meet personalized requirements. Balancing the generalization of the global model with the need for personalization is an ongoing challenge. This requires advanced techniques such as multi-task learning or fine-tuning, where each client can refine the global model to better suit their specific data distributions. Moreover, leveraging adaptive aggregation strategies that prioritize more relevant or critical clients can help tailor the global model while maintaining its overall effectiveness. Balancing both the global and local objectives in federated learning remains a central research challenge that requires innovative solutions to achieve optimal performance across diverse real-world applications.</p>
+
+<h2>Plans</h2>
+
+<p>To address the challenges of client data heterogeneity, the plan focuses on improving data preprocessing and standardization across all clients. This ensures that the models trained on different data sources are more aligned. By using techniques such as normalization or standardization, we can reduce the impact of diverse data distributions. Additionally, we plan to enhance the stability of local model training by using adaptive optimization techniques like Adam or RMSprop. To further address these issues, aggregation strategies will be adjusted, possibly introducing weighted aggregation or considering client-specific performance to improve the global model.</p>
+
+<p>For personalization, we aim to incorporate multi-task learning to allow each client to have a more personalized model while still benefiting from global training. This approach ensures that both the global model's performance and the clients' specific needs are balanced. Additionally, after federated training, fine-tuning will be applied locally to further refine the model for each client's data distribution. By utilizing a model ensemble, we can combine individual client models or adjust their weights to better optimize personalized predictions, ultimately improving the overall performance of the federated system.</p>">
+                        <div class="update-date">July 7, 2025</div>
+                        <div class="update-content">
+                            <h3>Progress Update 4</h3>
+                            <p>Comprehensive four-class classification experiments on MIT credit rating dataset comparing independent training vs horizontal federated learning under IID settings. Achieved high validation accuracy and identified key challenges in client consistency and personalization.</p>
+                            <div class="view-details"><i class="fas fa-file-alt"></i> View Details</div>
+                        </div>
+                    </div>
                     <div class="update-item milestone" data-markdown="<h1>Project Progress Update 3</h1>
 
 <h2>1. Achievements</h2>
