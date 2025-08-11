@@ -19,6 +19,7 @@
             <ul>
                 <li><a href="#overview" class="active">Overview</a></li>
                 <li><a href="#team">Team</a></li>
+                <li><a href="#final-report">Final Report</a></li>
                 <li><a href="#updates">Updates</a></li>
                 <li><a href="#interim-report">Interim Report</a></li>
                 <li><a href="#milestone">Milestone</a></li>
@@ -43,12 +44,12 @@
                         </div>
                         <div class="stat">
                             <h3>Status</h3>
-                            <p class="status in-progress">In Progress</p>
+                            <p class="status completed">Completed</p>
                         </div>
                         <div class="stat">
                             <h3>Completion</h3>
                             <div class="progress-bar">
-                                <div class="progress" style="width: 85%;">85%</div>
+                                <div class="progress" style="width: 100%;">100%</div>
                             </div>
                         </div>
                     </div>
@@ -85,6 +86,29 @@
                 </div>
             </section>
 
+            <section id="final-report">
+                <h2>Final Report</h2>
+                <div class="card">         
+                    <div class="report-description">
+                        <p>Our team has completed the final report for the Dynamic Credit Risk Prediction System Based on Federated Learning, summarizing the full project outcomes, experiments, and conclusions.</p>
+
+                        <h4>Report Highlights:</h4>
+                        <ul>
+                            <li><strong>Comprehensive Results:</strong> Finalized evaluation of horizontal and vertical FL performance</li>
+                            <li><strong>Methodologies:</strong> Complete pipeline from preprocessing to privacy mechanisms and aggregation</li>
+                            <li><strong>System Implementation:</strong> End-to-end federated setup and deployment details</li>
+                            <li><strong>Discussions:</strong> Limitations, lessons learned, and future work</li>
+                        </ul>
+                    </div>
+
+                    <div class="report-actions">
+                        <a href="Capstone Project Report.pdf" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Download Final Report
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <section id="updates">
                 <h2>Progress Updates</h2>
                 <div class="updates-list">
@@ -111,7 +135,7 @@
 <p>To address the challenges of client data heterogeneity, the plan focuses on improving data preprocessing and standardization across all clients. This ensures that the models trained on different data sources are more aligned. By using techniques such as normalization or standardization, we can reduce the impact of diverse data distributions. Additionally, we plan to enhance the stability of local model training by using adaptive optimization techniques like Adam or RMSprop. To further address these issues, aggregation strategies will be adjusted, possibly introducing weighted aggregation or considering client-specific performance to improve the global model.</p>
 
 <p>For personalization, we aim to incorporate multi-task learning to allow each client to have a more personalized model while still benefiting from global training. This approach ensures that both the global model's performance and the clients' specific needs are balanced. Additionally, after federated training, fine-tuning will be applied locally to further refine the model for each client's data distribution. By utilizing a model ensemble, we can combine individual client models or adjust their weights to better optimize personalized predictions, ultimately improving the overall performance of the federated system.</p>">
-                        <div class="update-date">Jul 7, 2025</div>
+                        <div class="update-date">July 7, 2025</div>
                         <div class="update-content">
                             <h3>Progress Update 4</h3>
                             <p>Comprehensive four-class classification experiments on MIT credit rating dataset comparing independent training vs horizontal federated learning under IID settings. Achieved high validation accuracy and identified key challenges in client consistency and personalization.</p>
